@@ -1,11 +1,7 @@
 // This code works to bring the cubesat back to (0,0,0), however, if you try to press one of the buttons to give it slack after bringing it back to (0,0,0), say you press button 1 again, it will keep trying to reel the cubesat in instead of giving it slack again, so it needs to be troubleshooted.
-
 #include <IRremote.hpp>
 
-int RECV_PIN = 13;
-IRrecv irrecv(RECV_PIN);
-decode_results results;
-
+#define IR_RECEIVE_PIN 13
 // Motor pins
 #define PUL1 8
 #define DIR1 9
@@ -37,30 +33,37 @@ long pos4 = 0;
 
 void setup() {
     Serial.begin(9600);
-    irrecv.begin(RECV_PIN);
+    IrReceiver.begin(IR_RECEIVE_PIN);
 
     pinMode(PUL1, OUTPUT);
     pinMode(DIR1, OUTPUT);
+    digitalWrite(DIR1, LOW);    
+
     pinMode(PUL2, OUTPUT);
     pinMode(DIR2, OUTPUT);
+    digitalWrite(DIR2, LOW);
+    
     pinMode(PUL3, OUTPUT);
     pinMode(DIR3, OUTPUT);
+    digitalWrite(DIR3, LOW);
+
     pinMode(PUL4, OUTPUT);
     pinMode(DIR4, OUTPUT);
-
-    digitalWrite(DIR1, LOW);
-    digitalWrite(DIR2, LOW);
-    digitalWrite(DIR3, LOW);
     digitalWrite(DIR4, LOW);
 
     Serial.println("Motors initialized. Origin is (0, 0, 0, 0).");
 }
 
 void loop() {
-    if (irrecv.decode()) {
-        uint32_t code = irrecv.decodedIRData.decodedRawData;
-        Serial.println(code, HEX);
-        irrecv.resume();
+        
+    if (IrReceiver.decode()) {
+        auto code = IrReceiver.decodedIRData.decodedRawData; //rawData_
+        Serial.print(code);
+
+        Serial.println(code, HEX); // Print "old" raw data
+        IrReceiver.printIRResultShort(&Serial); // Print complete received data in one line
+        IrReceiver.printIRSendUsage(&Serial);   // Print the statement required to send this data
+        IrReceiver.resume(); // Enable receiving of the next value    
 
         if (code == BTN1) {
             motor1Running = !motor1Running;

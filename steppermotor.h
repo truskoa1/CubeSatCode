@@ -18,8 +18,8 @@ class StepMotor
     this value will change with further testing. PLEASE do not run a sketch using this class without assigning it a
     value because the junk data held in an undeclared variable could be wack large */
     void begin();
-    void reelOut(int steps);
-    void reelIn(int steps);
+    void reelOut();
+    void reelIn();
 
     /* this is in case we want a timed motion instead of user controlled. I'm implementing 
     it here so the class can remain as untouched as possible. */

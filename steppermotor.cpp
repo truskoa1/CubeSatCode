@@ -16,25 +16,21 @@ void StepMotor::begin() {
   pinMode(dir_pin, OUTPUT);
 }
 
-void StepMotor::reelOut(int steps) {
+void StepMotor::reelOut() {
   digitalWrite(dir_pin, HIGH);
-  for (int i = 0; i < steps; i++) {
-    digitalWrite(pul_pin, HIGH);
-    delayMicroseconds(500); // we have to have these delays because code moves very fast and stepper motors do not. we could have this faster I think but not by much.
-    digitalWrite(pul_pin, LOW);
-    delayMicroseconds(500);
-  }
+  digitalWrite(pul_pin, HIGH);
+  delayMicroseconds(200); // we have to have these delays because code moves very fast and stepper motors do not. we could have this faster I think but not by much.
+  digitalWrite(pul_pin, LOW);
+  delayMicroseconds(200);
 }
-void StepMotor::reelIn(int steps) {
+void StepMotor::reelIn() {
   digitalWrite(dir_pin, LOW);
-  for (int i = 0; i < steps; i++) {
-    digitalWrite(pul_pin, HIGH);
-    delayMicroseconds(500);
-    digitalWrite(pul_pin, LOW);
-    delayMicroseconds(500);
-  }
+  digitalWrite(pul_pin, HIGH);
+  delayMicroseconds(200);
+  digitalWrite(pul_pin, LOW);
+  delayMicroseconds(200);
 }
-
+// fix this lol
 void StepMotor::timed_motion(int steps, int time) {
   digitalWrite(dir_pin, HIGH);
   for (int i = 0; i < steps; i++) {

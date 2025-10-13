@@ -13,18 +13,22 @@ void MotorControl::begin() {
   motor4.begin();
 }
 void MotorControl::reelAllOut(int steps) {
-  motor1.reelOut(steps);
-  motor2.reelOut(steps);
-  motor3.reelOut(steps);
-  motor4.reelOut(steps);
+  for (int i = 0; i < steps; i++) {
+    motor1.reelOut();
+    motor2.reelOut();
+    motor3.reelOut();
+    motor4.reelOut();
+  }
 }
 void MotorControl::reelAllIn(int steps) {
-  motor1.reelIn(steps);
-  motor2.reelIn(steps);
-  motor3.reelIn(steps);
-  motor4.reelIn(steps);
+  for (int i = 0; i < steps; i++) {
+    motor1.reelIn();
+    motor2.reelIn();
+    motor3.reelIn();
+    motor4.reelIn();
+  }
 }
-
+// fix this too
 void MotorControl::timed_together(int steps, int time) {
   motor1.timed_motion(steps, time);
   motor2.timed_motion(steps, time);

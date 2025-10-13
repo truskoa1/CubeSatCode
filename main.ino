@@ -11,7 +11,7 @@ StepMotor motor3(11, 12);
 StepMotor motor4(2, 3);
 
 MotorControl motors(motor1, motor2, motor3, motor4);
-const int steps;
+int steps(1600);
 bool extended = false; // should start as false
 
 void setup() {
@@ -22,15 +22,17 @@ void setup() {
 }
 
 void loop() {
-  if (Ir.Receiver.decode()) {
+  if (IrReceiver.decode()) {
     auto code = IrReceiver.decodedIRData.decodedRawData;
     if (!extended) {
-      motors.reelAllOut(int steps);
+      motors.reelAllOut(steps);
       extended = true;
+      IrReceiver.resume();
     }
     else {
-      motors.reelAllIn(int steps);
+      motors.reelAllIn(steps);
       extended = false;
+      IrReceiver.resume();
     }
     IrReceiver.resume();
   }

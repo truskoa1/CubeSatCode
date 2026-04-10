@@ -1,0 +1,26 @@
+#Build Directories
+build/
+bin/
+
+#Compiled Object files
+*.o
+*.obj
+*.d
+*.hex
+*.elf
+*.bin
+
+#IDE specifics
+.vscode/
+.vs/
+*.sln
+*.vcxproj
+*.user
+_vm/
+
+#PlatformIO
+.pio/
+
+#OS specific files
+.DS_Store
+Thumbs.db

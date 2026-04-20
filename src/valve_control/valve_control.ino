@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include <Arduino.h>
 
 #define SLAVE_ADDR 8  // Must match the master's address
 

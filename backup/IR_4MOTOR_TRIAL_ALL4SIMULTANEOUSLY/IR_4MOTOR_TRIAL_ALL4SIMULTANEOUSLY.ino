@@ -31,13 +31,13 @@ void setup() {
 }
   
 void loop() {
-  Serial.println("Entered loop");
+  
   if (irrecv.decode())
     {
       Serial.println(irrecv.decodedIRData.decodedRawData, HEX);
       //Serial.println(irrecv.decodedIRData.address, HEX);
       //Serial.println(irrecv.decodedIRData.command, HEX);
-
+      //Serial.println("Entered loop");
       irrecv.resume(); // Receive the next value
       
       //get start value

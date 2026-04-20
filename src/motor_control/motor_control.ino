@@ -34,11 +34,12 @@ void setup() {
 
 void loop() {
   if (IrReceiver.decode()) {
+    Serial.println("Entered loop");
     auto code = IrReceiver.decodedIRData.decodedRawData;
     //Serial.print("Received IR code: ");
     //Serial.println(code, HEX);
     IrReceiver.resume();  // Ready to receive the next IR code
-
+    
     // Send command based on IR code
     if (code == SOL1_BTN) {            
       sendToSlave(1);                

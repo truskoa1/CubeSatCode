@@ -45,12 +45,13 @@ void loop() {
 
     // Send command based on IR code
     if (code == SOL1_BTN) {
-      for (int i = 0; i < steps; i++) {
-        motor1.reelOut();
-        motor2.reelOut();
-        motor3.reelOut();
+      for (int i = 0; i < 1000; i++) {
         motor4.reelOut();
-      }
+        }    
+      for (int i = 0; i < 1000; i++) {
+        motor4.reelIn();
+        }        
+      extended = true;            
       sendToSlave(1);                
 
     } else if (code == SOL2_BTN) {
